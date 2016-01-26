@@ -61,6 +61,7 @@ Where field `config` and `plugins` is an array of eslint configs and plugins res
 
 [voltron]: http://25.media.tumblr.com/tumblr_m1zllfCJV21r8gq9go11_250.gif
 
+
 ## License
 
 MIT © [Vladimir Starkov](https://iamstarkov.com)
