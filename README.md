@@ -6,6 +6,25 @@
 
 > Yeoman generator to get eslint up and running in your project with your favorite preset
 
+## Install
+
+    npm install --global yo generator-eslint-init
+
+## Usage
+
+    # nope, it will do nothing, just install eslint into your project
+    yo eslint-init
+
+    # install eslint with your favorite preset
+    yo eslint-init airbnb
+
+    # or with old one
+    yo eslint-init airbnb/legacy
+
+    # or even with plugins
+    yo eslint-init airbnb -p require-path-exists
+    yo eslint-init airbnb --plugins require-path-exists
+
 ## License
 
 MIT © [Vladimir Starkov](https://iamstarkov.com)
