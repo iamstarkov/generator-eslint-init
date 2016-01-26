@@ -18,14 +18,15 @@
     # install eslint with your favorite preset
     yo eslint-init airbnb
 
-    # or with old one
+    # another one
     yo eslint-init airbnb/legacy
 
-    # or even with plugins
-    yo eslint-init airbnb -p require-path-exists
-    yo eslint-init airbnb -p plugin1,plugin2
-    yo eslint-init airbnb -p plugin1,plugin2
-    yo eslint-init airbnb --plugins require-path-exists
+    # even with plugin
+    yo eslint-init airbnb --plugins react
+    yo eslint-init airbnb --plugins react,require-path-exists
+
+    # and short notation
+    yo eslint-init airbnb -p react,require-path-exists
 
 ## Composability
 
