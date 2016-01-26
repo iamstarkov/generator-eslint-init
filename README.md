@@ -41,10 +41,8 @@ Just plug in _eslint-init_ into your generator and let it setup your `.eslintrc.
 
 #### Compose
 
-`skip-install` is used because `babel` install babel deps for you
-and you don’t need to test it in your own generator tests.
-
-Add any extra fields you need to `options.config` to extend the [default][defaults] configuration. The entire range of [Babel options][eslint-init-options] are allowed.
+The whole `options.config`
+will be saved into `.eslintrc.json`. Items from `extends` and `plugins` fields will be installed as `devDependencies` into your project with proper package names.
 
 ```js
 this.composeWith('eslint-init', { options: {
@@ -57,8 +55,6 @@ this.composeWith('eslint-init', { options: {
   local: require.resolve('generator-eslint-init/generators/app')
 });
 ```
-
-Where field `config` and `plugins` is an array of eslint configs and plugins respectively and will be added to `.eslintrc.json` and installed to `devDependencies` into your project with proper names: `airbnb` will be `eslint-config-es2015` and `require-path-exists` will be `eslint-plugin-require-path-exists`. For sure, they will be added to
 
 [voltron]: http://25.media.tumblr.com/tumblr_m1zllfCJV21r8gq9go11_250.gif
 
