@@ -1,5 +1,5 @@
 # generator-eslint-init [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
-> Yeoman generator to get eslint up and running in your project
+> Yeoman generator to get eslint up and running in your project with your favorite preset
 
 ## Installation
 
