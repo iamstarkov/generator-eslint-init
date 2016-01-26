@@ -23,6 +23,8 @@
 
     # or even with plugins
     yo eslint-init airbnb -p require-path-exists
+    yo eslint-init airbnb -p plugin1,plugin2
+    yo eslint-init airbnb -p plugin1,plugin2
     yo eslint-init airbnb --plugins require-path-exists
 
 ## Composability
@@ -41,21 +43,13 @@ Just plug in _eslint-init_ into your generator and let it setup your `.eslintrc.
 `skip-install` is used because `babel` install babel deps for you
 and you don’t need to test it in your own generator tests.
 
-```js
-this.composeWith('eslint-init', { options: {
-  'skip-install': this.options['skip-install']
-}}, {
-  local: require.resolve('generator-eslint-init/generators/app')
-});
-```
-
 Add any extra fields you need to `options.config` to extend the [default][defaults] configuration. The entire range of [Babel options][eslint-init-options] are allowed.
 
 ```js
-this.composeWith('babel', { options: {
+this.composeWith('eslint-init', { options: {
   'skip-install': this.options['skip-install'],
   config: {
-    config: ['airbnb'],
+    extends: 'airbnb',
     plugins: ['require-path-exists']
   }
 }}, {
