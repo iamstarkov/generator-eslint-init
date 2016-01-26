@@ -10,11 +10,11 @@
 
 MIT © [Vladimir Starkov](https://iamstarkov.com)
 
-[npm-url]: https://npmjs.org/package/generator-babel
-[npm-image]: https://img.shields.io/npm/v/generator-babel.svg?style=flat
+[npm-url]: https://npmjs.org/package/generator-eslint-init
+[npm-image]: https://img.shields.io/npm/v/generator-eslint-init.svg?style=flat
 
-[travis-url]: https://travis-ci.org/iamstarkov/generator-babel
-[travis-image]: https://img.shields.io/travis/iamstarkov/generator-babel.svg?style=flat
+[travis-url]: https://travis-ci.org/iamstarkov/generator-eslint-init
+[travis-image]: https://img.shields.io/travis/iamstarkov/generator-eslint-init.svg?style=flat
 
-[depstat-url]: https://david-dm.org/iamstarkov/generator-babel
-[depstat-image]: https://david-dm.org/iamstarkov/generator-babel.svg?style=flat
+[depstat-url]: https://david-dm.org/iamstarkov/generator-eslint-init
+[depstat-image]: https://david-dm.org/iamstarkov/generator-eslint-init.svg?style=flat
