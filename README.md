@@ -1,4 +1,9 @@
-# generator-eslint-init [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
+# generator-eslint-init
+
+[![NPM version][npm-image]][npm-url]
+[![Build Status][travis-image]][travis-url]
+[![Dependency Status][depstat-image]][depstat-url]
+
 > Yeoman generator to get eslint up and running in your project with your favorite preset
 
 ## Installation
@@ -24,12 +29,11 @@ Yeoman has a heart of gold. He&#39;s a person with feelings and opinions, but he
 
 MIT © [Vladimir Starkov](https://iamstarkov.com)
 
+[npm-url]: https://npmjs.org/package/generator-babel
+[npm-image]: https://img.shields.io/npm/v/generator-babel.svg?style=flat
 
-[npm-image]: https://badge.fury.io/js/generator-eslint-init.svg
-[npm-url]: https://npmjs.org/package/generator-eslint-init
-[travis-image]: https://travis-ci.org/iamstarkov/generator-eslint-init.svg?branch=master
-[travis-url]: https://travis-ci.org/iamstarkov/generator-eslint-init
-[daviddm-image]: https://david-dm.org/iamstarkov/generator-eslint-init.svg?theme=shields.io
-[daviddm-url]: https://david-dm.org/iamstarkov/generator-eslint-init
-[coveralls-image]: https://coveralls.io/repos/iamstarkov/generator-eslint-init/badge.svg
-[coveralls-url]: https://coveralls.io/r/iamstarkov/generator-eslint-init
+[travis-url]: https://travis-ci.org/iamstarkov/generator-babel
+[travis-image]: https://img.shields.io/travis/iamstarkov/generator-babel.svg?style=flat
+
+[depstat-url]: https://david-dm.org/iamstarkov/generator-babel
+[depstat-image]: https://david-dm.org/iamstarkov/generator-babel.svg?style=flat
