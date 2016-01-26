@@ -21,7 +21,7 @@
     # another one
     yo eslint-init airbnb/legacy
 
-    # even with plugin
+    # even with plugins
     yo eslint-init airbnb --plugins react
     yo eslint-init airbnb --plugins react,require-path-exists
 
