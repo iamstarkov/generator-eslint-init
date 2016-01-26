@@ -112,16 +112,17 @@ describe('generator-eslint-init:app', function () {
     generator()
       .withOptions({ skipInstall: false })
       .withOptions({ config: {
-        extends: 'airbnb',
+        extends: 'airbnb/legacy',
         plugins: ['require-path-exists']
       }})
       .on('ready', function(gen) {
         gen.fs.write(gen.destinationPath('package.json'), stringify(pkg));
       }.bind(this))
       .on('end', function() {
+        assert.fileContent('.eslintrc.json', /"extends": "airbnb\/legacy"/);
         assert.file('package.json');
         assert.fileContent('package.json', /eslint/);
-        assert.fileContent('package.json', /eslint-config-airbnb/);
+        assert.fileContent('package.json', /eslint-config-airbnb":/);
         assert.fileContent('package.json', /eslint-plugin-require-path-exists/);
         done();
       });
