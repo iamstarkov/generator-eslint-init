@@ -1,5 +1,3 @@
-/* eslint-disable func-names */
-
 var yeoman = require('yeoman-generator');
 var objectAssign = require('object-assign');
 
@@ -20,9 +18,9 @@ var maybeStr2arr = function maybeStr2arr(input) {
   return typeof input === 'string' ? [input] : input;
 };
 
-module.exports = yeoman.generators.Base.extend({
+module.exports = yeoman.Base.extend({
   constructor: function() {
-    yeoman.generators.Base.apply(this, arguments);
+    yeoman.Base.apply(this, arguments);
     this.argument('extends', { type: Array, required: false,
       desc: endline('Extends list: "yo eslint-init airbnb"'),
     });
