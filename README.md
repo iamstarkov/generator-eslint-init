@@ -25,6 +25,48 @@
     yo eslint-init airbnb -p require-path-exists
     yo eslint-init airbnb --plugins require-path-exists
 
+## Composability
+
+> Composability is a way to combine smaller parts to make one large thing. Sort of [like Voltron®][voltron]  
+> — [Yeoman docs](http://yeoman.io/authoring/composability.html)
+
+Just plug in _eslint-init_ into your generator and let it setup your `.eslintrc.json` and install required `devDependencies` for you. Everybody wins.
+
+### Install
+
+    npm install --save generator-eslint-init
+
+#### Compose
+
+`skip-install` is used because `babel` install babel deps for you
+and you don’t need to test it in your own generator tests.
+
+```js
+this.composeWith('eslint-init', { options: {
+  'skip-install': this.options['skip-install']
+}}, {
+  local: require.resolve('generator-eslint-init/generators/app')
+});
+```
+
+Add any extra fields you need to `options.config` to extend the [default][defaults] configuration. The entire range of [Babel options][eslint-init-options] are allowed.
+
+```js
+this.composeWith('babel', { options: {
+  'skip-install': this.options['skip-install'],
+  config: {
+    config: ['airbnb'],
+    plugins: ['require-path-exists']
+  }
+}}, {
+  local: require.resolve('generator-eslint-init/generators/app')
+});
+```
+
+Where field `config` and `plugins` is an array of eslint configs and plugins respectively and will be added to `.eslintrc.json` and installed to `devDependencies` into your project with proper names: `airbnb` will be `eslint-config-es2015` and `require-path-exists` will be `eslint-plugin-require-path-exists`. For sure, they will be added to
+
+[voltron]: http://25.media.tumblr.com/tumblr_m1zllfCJV21r8gq9go11_250.gif
+
 ## License
 
 MIT © [Vladimir Starkov](https://iamstarkov.com)
