@@ -13,7 +13,27 @@
   ],
   "main": "generators/app/index.js",
   "keywords": [
-    "yeoman-generator"
+    "yeoman-generator",
+    "boilerplate",
+    "node",
+    "starter",
+    "kit",
+    "yeoman",
+    "plugin",
+    "boilerplate",
+    "template",
+    "scaffold",
+    "module",
+    "node_module",
+    "node-module",
+    "travis",
+    "javascript",
+    "npm",
+    "lint",
+    "code-lint",
+    "linting",
+    "code-linting",
+    "eslint"
   ],
   "dependencies": {
     "object-assign": "^4.0.1",
