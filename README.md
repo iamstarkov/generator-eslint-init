@@ -4,7 +4,7 @@
 [![Build Status][travis-image]][travis-url]
 [![Dependency Status][depstat-image]][depstat-url]
 
-> Yeoman generator to get eslint up and running in your project with your favorite preset
+> Yeoman generator to get eslint up and running in your project with your favorite preset (and with plugins if you want)
 
 ## Install
 

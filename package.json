@@ -1,7 +1,7 @@
 {
   "name": "generator-eslint-init",
   "version": "0.0.0",
-  "description": "Yeoman generator to get eslint up and running in your project with your favorite preset",
+  "description": "Yeoman generator to get eslint up and running in your project with your favorite preset (and with plugins if you want)",
   "homepage": "",
   "author": {
     "name": "Vladimir Starkov",
