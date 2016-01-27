@@ -58,6 +58,13 @@ this.composeWith('eslint-init', { options: {
 
 [voltron]: http://25.media.tumblr.com/tumblr_m1zllfCJV21r8gq9go11_250.gif
 
+## Improvements / Contributing
+
+* extend existing eslint config, and do not overwrite it
+* let to save in different locations: `package.json`, `.eslintrc.yml` or `.eslintrc.js`, not only in `.eslintrc.json`
+
+Pull-requests are very welcome.
+
 ## License
 
 MIT © [Vladimir Starkov](https://iamstarkov.com)
