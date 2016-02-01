@@ -52,7 +52,7 @@ this.composeWith('eslint-init', { options: {
     plugins: ['require-path-exists']
   }
 }}, {
-  local: require.resolve('generator-eslint-init/generators/app')
+  local: require.resolve('generator-eslint-init')
 });
 ```
 
