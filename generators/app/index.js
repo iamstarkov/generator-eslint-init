@@ -9,7 +9,6 @@ var stringify = function stringify(obj) { return JSON.stringify(obj, null, 2); }
 var concat = function concat(arr1, arr2, arr3) { return [].concat(arr1, arr2, arr3); };
 var prefix = function prefix(predicate) { return function (item) { return predicate + item; }; };
 var getPkgName = function getPkgName(str) { return (str || '').split('/')[0]; };
-var endline = function endline(str) { return str + '\n'; };
 var truncateExtends = function truncateExtends(input) {
   var obj = input;
   if (obj.extends && obj.extends.length === 1) {
@@ -28,13 +27,10 @@ module.exports = yeoman.Base.extend({
   constructor: function () {
     yeoman.Base.apply(this, arguments);
     this.argument('extends', { type: Array, required: false,
-      desc: endline('Extends list: "yo eslint-init airbnb"'),
+      desc: 'Extends list: "yo eslint-init airbnb"',
     });
     this.option('plugins', { type: String, required: false, alias: 'p',
-      desc: endline([
-        'Plugins list: "yo eslint-init --plugins require-path-exists"',
-        'or "yo eslint-init -p require-path-exists"',
-      ].join(' ')),
+      desc: 'Plugins list: "yo eslint-init -p require-path-exists"',
     });
   },
   writing: {
@@ -57,7 +53,7 @@ module.exports = yeoman.Base.extend({
       resultConfig = merge(cliConfig, this.options.config);
       this.fs.write(
         this.destinationPath('.eslintrc.json'),
-        endline(stringify(truncateExtends(resultConfig)))
+        (stringify(truncateExtends(resultConfig)) + '\n')
       );
       this.devDepsToInstall = concat(
         ['eslint'],
