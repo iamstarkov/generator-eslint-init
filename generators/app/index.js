@@ -67,9 +67,7 @@ module.exports = yeoman.Base.extend({
     },
   },
   install: function () {
-    var skipInstall = this.options['skip-install'];
-    var needInstall = !skipInstall;
-    if (needInstall) {
+    if (!this.options['skip-install']) {
       this.npmInstall(this.devDepsToInstall, { 'save-dev': true });
     }
   },
