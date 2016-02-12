@@ -29,14 +29,16 @@ describe('generator-eslint-init:app', function () {
   describe('cli', function () {
     describe('extends', function () {
       it('uses one extends from arguments', function (done) {
+        var input = { extends: 'airbnb' };
         generator().withArguments(['airbnb']).on('end', function () {
-          assert.fileContent('.eslintrc.json', /"extends": "airbnb"/);
+          assert.fileContent('.eslintrc.json', stringify(input));
           done();
         });
       });
       it('uses several extends array from arguments', function (done) {
-        generator().withArguments(['airbnb', 'meow']).on('end', function () {
-          assert.fileContent('.eslintrc.json', /"extends":[\n"airbnb", "meow"\n]/);
+        var input = { extends: ['airbnb', 'hexo'] };
+        generator().withArguments(['airbnb', 'hexo']).on('end', function () {
+          assert.fileContent('.eslintrc.json', stringify(input));
           done();
         });
       });
@@ -44,29 +46,31 @@ describe('generator-eslint-init:app', function () {
 
     describe('plugins', function () {
       it('uses plugins string with one item from options', function (done) {
-        generator().withOptions({ plugins: 'purr' }).on('end', function () {
-          assert.fileContent('.eslintrc.json', /"plugins":[\n"purr" \n]/);
+        generator().withOptions({ plugins: 'react' }).on('end', function () {
+          assert.fileContent('.eslintrc.json', stringify({ plugins: ['react'] }));
           done();
         });
       });
 
       it('uses plugins string from options', function (done) {
-        generator().withOptions({ plugins: 'purr,scratch' }).on('end', function () {
-          assert.fileContent('.eslintrc.json', /"plugins":[\n"purr", "scratch"\n]/);
+        generator().withOptions({ plugins: 'react,fand' }).on('end', function () {
+          assert.fileContent('.eslintrc.json', stringify({ plugins: ['react', 'fand'] }));
           done();
         });
       });
 
       it('uses plugins array with one item from options', function (done) {
-        generator().withOptions({ plugins: ['purr'] }).on('end', function () {
-          assert.fileContent('.eslintrc.json', /"plugins":[\n"purr" \n]/);
+        var input = { plugins: ['react'] };
+        generator().withOptions(input).on('end', function () {
+          assert.fileContent('.eslintrc.json', stringify(input));
           done();
         });
       });
 
       it('uses plugins array from options', function (done) {
-        generator().withOptions({ plugins: ['purr', 'scratch'] }).on('end', function () {
-          assert.fileContent('.eslintrc.json', /"plugins":[\n"purr", "scratch"\n]/);
+        var input = { plugins: ['react', 'fand'] };
+        generator().withOptions(input).on('end', function () {
+          assert.fileContent('.eslintrc.json', stringify(input));
           done();
         });
       });
@@ -75,52 +79,47 @@ describe('generator-eslint-init:app', function () {
 
   describe('compose', function () {
     it('uses config option', function (done) {
-      generator().withOptions({ config: { key: 'val' } }).on('end', function () {
-        assert.fileContent('.eslintrc.json', /"key": "val"/);
+      var input = { key: 'val' };
+      generator().withOptions({ config: input }).on('end', function () {
+        assert.fileContent('.eslintrc.json', stringify(input));
         done();
       });
     });
 
     it('uses config.extends string option', function (done) {
-      generator().withOptions({ config: { extends: 'meow' } }).on('end', function () {
-        assert.fileContent('.eslintrc.json', /"extends": "meow"/);
+      var input = { extends: 'airbnb' };
+      generator().withOptions({ config: input }).on('end', function () {
+        assert.fileContent('.eslintrc.json', stringify(input));
         done();
       });
     });
 
     it('uses config.extends array option', function (done) {
-      generator().withOptions({ config: { extends: ['meow', 'purr'] } }).on('end', function () {
-        assert.fileContent('.eslintrc.json', /"extends":[\n"meow", "purr"\n]/);
+      var input = { extends: ['airbnb', 'hexo'] };
+      generator().withOptions({ config: input }).on('end', function () {
+        assert.fileContent('.eslintrc.json', stringify(input));
         done();
       });
     });
 
     it('uses config.plugins array option', function (done) {
-      generator().withOptions({ config: { plugins: ['meow', 'purr'] } }).on('end', function () {
-        assert.fileContent('.eslintrc.json', /"plugins":[\n"meow", "purr"\n]/);
+      var input = { plugins: ['react', 'fand'] };
+      generator().withOptions({ config: input }).on('end', function () {
+        assert.fileContent('.eslintrc.json', stringify(input));
         done();
       });
     });
   });
 
   it('install extends and plugins with proper prefixes', function (done) {
-    var pkg = {
-      name: 'name',
-      description: 'desc',
-      repository: 'iamstarkov/generator-eslint-init',
-      license: 'MIT',
+    var input = {
+      extends: 'airbnb/legacy',
+      plugins: ['require-path-exists'],
     };
     generator()
-      .withOptions({ skipInstall: false })
-      .withOptions({ config: {
-        extends: 'airbnb/legacy',
-        plugins: ['require-path-exists'],
-      } })
-      .on('ready', function (gen) {
-        gen.fs.write(gen.destinationPath('package.json'), stringify(pkg));
-      }.bind(this))
+      .withOptions({ config: input })
       .on('end', function () {
-        assert.fileContent('.eslintrc.json', /"extends": "airbnb\/legacy"/);
+        assert.fileContent('.eslintrc.json', stringify(input));
         assert.file('package.json');
         assert.fileContent('package.json', /eslint/);
         assert.fileContent('package.json', /eslint-config-airbnb":/);
