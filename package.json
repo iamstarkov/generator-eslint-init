@@ -36,7 +36,11 @@
     "eslint"
   ],
   "dependencies": {
+    "latest-version": "^2.0.0",
     "object-assign": "^4.0.1",
+    "pinkie-promise": "^2.0.0",
+    "ramda": "^0.19.1",
+    "sorted-object": "^1.0.0",
     "yeoman-generator": "^0.22.4"
   },
   "devDependencies": {
@@ -49,7 +53,7 @@
   },
   "repository": "iamstarkov/generator-eslint-init",
   "scripts": {
-    "test": "mocha --timeout 240000",
+    "test": "mocha -t 10000",
     "tdd": "npm test -- --watch",
     "postpublish": "git push origin master --tags"
   },

@@ -12,7 +12,7 @@
 
 ## Usage
 
-    # nope, it will do nothing, just install eslint into your project
+    # nope, it will do nothing, just install eslint and babel-eslint into your project
     yo eslint-init
 
     # install eslint with your favorite preset
@@ -60,8 +60,9 @@ this.composeWith('eslint-init', { options: {
 
 ## Improvements / Contributing
 
-* extend existing eslint config, and do not overwrite it
-* let to save in different locations: `package.json`, `.eslintrc.yml` or `.eslintrc.js`, not only in `.eslintrc.json`
+* [x] extend existing eslint config, and do not overwrite it
+* [ ] ability to specify versions to not depend on network to extend `package.json` devDependencies section
+* [ ] let to save in different locations: `package.json`, `.eslintrc.yml` or `.eslintrc.js`, not only in `.eslintrc.json`
 
 Pull-requests are very welcome.
 
