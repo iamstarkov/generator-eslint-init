@@ -3,6 +3,7 @@
 'use strict';
 
 var path = require('path');
+var R = require('ramda');
 var assert = require('yeoman-assert');
 var helpers = require('yeoman-test');
 var stringify = function stringify(obj) { return JSON.stringify(obj, null, 2); };
@@ -120,6 +121,28 @@ describe('generator-eslint-init:app', function () {
       .withOptions({ config: input })
       .on('end', function () {
         assert.fileContent('.eslintrc.json', stringify(input));
+        assert.file('package.json');
+        assert.fileContent('package.json', /eslint/);
+        assert.fileContent('package.json', /babel-eslint/);
+        assert.fileContent('package.json', /eslint-config-airbnb":/);
+        assert.fileContent('package.json', /eslint-plugin-require-path-exists/);
+        done();
+      });
+  });
+
+  it('extends and doesnt overwrite existing .eslintrc.json', function (done) {
+    var input = {
+      extends: 'airbnb/legacy',
+      plugins: ['require-path-exists'],
+    };
+    var existing = { key: 'val' };
+    generator()
+      .withOptions({ config: input })
+      .on('ready', function (gen) {
+        gen.fs.write(gen.destinationPath('.eslintrc.json'), stringify(existing));
+      }.bind(this))
+      .on('end', function () {
+        assert.fileContent('.eslintrc.json', stringify(R.merge(existing, input)));
         assert.file('package.json');
         assert.fileContent('package.json', /eslint/);
         assert.fileContent('package.json', /babel-eslint/);
