@@ -90,7 +90,7 @@ module.exports = yeoman.Base.extend({
   },
   install: function () {
     if (!this.options['skip-install']) {
-      this.npmInstall(this.devDepsToInstall, { 'save-dev': true });
+      this.npmInstall();
     }
   },
 });
