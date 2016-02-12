@@ -53,7 +53,7 @@
   },
   "repository": "iamstarkov/generator-eslint-init",
   "scripts": {
-    "test": "mocha",
+    "test": "mocha -t 10000",
     "tdd": "npm test -- --watch",
     "postpublish": "git push origin master --tags"
   },
