@@ -122,6 +122,7 @@ describe('generator-eslint-init:app', function () {
         assert.fileContent('.eslintrc.json', stringify(input));
         assert.file('package.json');
         assert.fileContent('package.json', /eslint/);
+        assert.fileContent('package.json', /babel-eslint/);
         assert.fileContent('package.json', /eslint-config-airbnb":/);
         assert.fileContent('package.json', /eslint-plugin-require-path-exists/);
         done();
