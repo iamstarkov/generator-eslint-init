@@ -1,14 +1,16 @@
-/* eslint-disable func-names */
+/* eslint-disable func-names,vars-on-top */
 'use strict';
 
 var yeoman = require('yeoman-generator');
-var objectAssign = require('object-assign');
+var R = require('ramda');
+var Promise = require('pinkie-promise');
+var latest = require('latest-version');
+var sortedObject = require('sorted-object');
 
-var merge = objectAssign.bind(null, {});
 var stringify = function stringify(obj) { return JSON.stringify(obj, null, 2); };
-var concat = function concat(arr1, arr2, arr3) { return [].concat(arr1, arr2, arr3); };
-var prefix = function prefix(predicate) { return function (item) { return predicate + item; }; };
+var parse = JSON.parse.bind(JSON);
 var getPkgName = function getPkgName(str) { return (str || '').split('/')[0]; };
+
 var truncateExtends = function truncateExtends(input) {
   var obj = input;
   if (obj.extends && obj.extends.length === 1) {
@@ -23,6 +25,12 @@ var maybeStr2arr = function maybeStr2arr(input) {
   return (typeof input === 'string') ? [input] : input;
 };
 
+// splitAndTrimEach :: String -> [String]
+var splitAndTrimEach = R.pipe(R.split(','), R.map(R.trim));
+
+// concatAll :: [Array] -> Array
+var concatAll = R.reduce(R.concat, []);
+
 module.exports = yeoman.Base.extend({
   constructor: function () {
     yeoman.Base.apply(this, arguments);
@@ -35,31 +43,49 @@ module.exports = yeoman.Base.extend({
   },
   writing: {
     app: function () {
-      var cliConfig = {};
-      var plugins = this.options.plugins || this.options.p;
-      var resultConfig;
+      var pkg = this.fs.readJSON(this.destinationPath('package.json'), {});
+      var done = this.async();
+
+      var cli = {};
 
       if (this.extends) {
-        cliConfig.extends = this.extends;
+        cli.extends = this.extends;
       }
 
+      var plugins = this.options.plugins;
       if (typeof plugins === 'boolean') {
         this.log('Maybe you forgot double dash: `-plugins` instead of `--plugins`');
       }
       if (plugins) {
-        cliConfig.plugins = (typeof plugins === 'string') ? plugins.split(',') : plugins;
+        cli.plugins = (typeof plugins === 'string') ? splitAndTrimEach(plugins) : plugins;
       }
 
-      resultConfig = merge(cliConfig, this.options.config);
-      this.fs.write(
-        this.destinationPath('.eslintrc.json'),
-        (stringify(truncateExtends(resultConfig)) + '\n')
-      );
-      this.devDepsToInstall = concat(
+      var existing = this.fs.exists(this.destinationPath('.eslintrc.json'))
+            ? parse(this.fs.read(this.destinationPath('.eslintrc.json')))
+            : {};
+
+      var options = this.options.config || {};
+      var result = R.mergeAll([existing, cli, options]);
+      var deps = concatAll([
         ['eslint'],
-        (maybeStr2arr(resultConfig.extends) || []).map(getPkgName).map(prefix('eslint-config-')),
-        (maybeStr2arr(resultConfig.plugins) || []).map(prefix('eslint-plugin-'))
-      );
+        (maybeStr2arr(result.extends) || []).map(getPkgName).map(R.concat('eslint-config-')),
+        (maybeStr2arr(result.plugins) || []).map(R.concat('eslint-plugin-')),
+      ]);
+      Promise.all(deps.map(latest))
+        .then(function (versions) {
+          this.fs.write(
+            this.destinationPath('.eslintrc.json'),
+            (stringify(truncateExtends(result)) + '\n')
+          );
+          var devDeps = R.zipObj(deps, versions.map(R.concat('^')));
+          pkg.devDependencies = sortedObject(R.merge((pkg.devDependencies || {}), devDeps));
+          this.fs.writeJSON(this.destinationPath('package.json'), pkg);
+          done();
+        }.bind(this))
+        .catch(function () {
+          this.log('Warning: one of [' + deps.join(', ') + '] dont exist');
+          done();
+        }.bind(this));
     },
   },
   install: function () {
