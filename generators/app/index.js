@@ -80,8 +80,8 @@ module.exports = yeoman.Base.extend({
           pkg.devDependencies = sortedObject(R.merge((pkg.devDependencies || {}), devDeps));
           this.fs.writeJSON(this.destinationPath('package.json'), pkg);
         }.bind(this))
-        .catch(function () {
-          this.log('Warning: one of [' + deps.join(', ') + '] dont exist');
+        .catch(function (reason) {
+          throw reason;
         }.bind(this));
     },
   },
