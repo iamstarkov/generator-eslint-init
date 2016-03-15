@@ -115,7 +115,7 @@ describe('generator-eslint-init:app', function () {
 
   it('install extends and plugins with proper prefixes', function (done) {
     var deps = [
-      'eslint', 'babel-eslint',
+      'eslint@^2.4.0', 'babel-eslint@^5.0.0',
       'eslint-config-airbnb', 'eslint-plugin-require-path-exists'
     ];
     var input = {
@@ -137,7 +137,7 @@ describe('generator-eslint-init:app', function () {
 
   it('extends and doesnt overwrite existing .eslintrc.json', function (done) {
     var deps = [
-      'eslint', 'babel-eslint',
+      'eslint@^2.4.0', 'babel-eslint@^5.0.0',
       'eslint-config-airbnb', 'eslint-plugin-require-path-exists'
     ];
     var input = {
