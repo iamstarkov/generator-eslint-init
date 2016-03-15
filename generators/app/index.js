@@ -1,4 +1,4 @@
-/* eslint-disable func-names, vars-on-top, no-extra-binding */
+/* eslint-disable func-names, vars-on-top, no-extra-bind */
 'use strict';
 
 var yeoman = require('yeoman-generator');
@@ -32,10 +32,10 @@ module.exports = yeoman.Base.extend({
   constructor: function () {
     yeoman.Base.apply(this, arguments);
     this.argument('extends', { type: Array, required: false,
-      desc: 'Extends list: "yo eslint-init airbnb"',
+      desc: 'Extends list: "yo eslint-init airbnb"'
     });
     this.option('plugins', { type: String, required: false, alias: 'p',
-      desc: 'Plugins list: "yo eslint-init -p require-path-exists"',
+      desc: 'Plugins list: "yo eslint-init -p require-path-exists"'
     });
 
     // helpers
@@ -77,7 +77,7 @@ module.exports = yeoman.Base.extend({
     var deps = concatAll([
       ['eslint', 'babel-eslint'],
       (maybeStr2arr(result.extends) || []).map(getPkgName).map(R.concat('eslint-config-')),
-      (maybeStr2arr(result.plugins) || []).map(R.concat('eslint-plugin-')),
+      (maybeStr2arr(result.plugins) || []).map(R.concat('eslint-plugin-'))
     ]);
     return depsObject(deps)
       .then(function (devDeps) {
@@ -91,5 +91,5 @@ module.exports = yeoman.Base.extend({
     if (!this.options['skip-install']) {
       this.npmInstall();
     }
-  },
+  }
 });
