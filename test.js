@@ -7,7 +7,7 @@ var R = require('ramda');
 var assert = require('yeoman-assert');
 var helpers = require('yeoman-test');
 var depsObject = require('deps-object');
-var stringify = function stringify(obj) { return JSON.stringify(obj, null, 2); };
+var stringify = require('./generators/app/json-fp').stringify;
 
 var generator = function () {
   return helpers.run(path.join(__dirname, './generators/app'));
