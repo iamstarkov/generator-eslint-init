@@ -22,7 +22,7 @@ describe('generator-eslint-init:app', function () {
 
   it('creates empty files with zero input', function (done) {
     generator().on('end', function () {
-      assert.fileContent('.eslintrc.json', '{}');
+      assert.jsonFileContent('.eslintrc.json', {});
       done();
     });
   });
@@ -32,14 +32,14 @@ describe('generator-eslint-init:app', function () {
       it('uses one extends from arguments', function (done) {
         var input = { extends: 'airbnb' };
         generator().withArguments(['airbnb']).on('end', function () {
-          assert.fileContent('.eslintrc.json', stringify(input));
+          assert.jsonFileContent('.eslintrc.json', input);
           done();
         });
       });
       it('uses several extends array from arguments', function (done) {
         var input = { extends: ['airbnb', 'hexo'] };
         generator().withArguments(['airbnb', 'hexo']).on('end', function () {
-          assert.fileContent('.eslintrc.json', stringify(input));
+          assert.jsonFileContent('.eslintrc.json', input);
           done();
         });
       });
@@ -48,14 +48,14 @@ describe('generator-eslint-init:app', function () {
     describe('plugins', function () {
       it('uses plugins string with one item from options', function (done) {
         generator().withOptions({ plugins: 'react' }).on('end', function () {
-          assert.fileContent('.eslintrc.json', stringify({ plugins: ['react'] }));
+          assert.jsonFileContent('.eslintrc.json', { plugins: ['react'] });
           done();
         });
       });
 
       it('uses plugins string from options', function (done) {
         generator().withOptions({ plugins: 'react,fand' }).on('end', function () {
-          assert.fileContent('.eslintrc.json', stringify({ plugins: ['react', 'fand'] }));
+          assert.jsonFileContent('.eslintrc.json', { plugins: ['react', 'fand'] });
           done();
         });
       });
@@ -63,7 +63,7 @@ describe('generator-eslint-init:app', function () {
       it('uses plugins array with one item from options', function (done) {
         var input = { plugins: ['react'] };
         generator().withOptions(input).on('end', function () {
-          assert.fileContent('.eslintrc.json', stringify(input));
+          assert.jsonFileContent('.eslintrc.json', input);
           done();
         });
       });
@@ -71,7 +71,7 @@ describe('generator-eslint-init:app', function () {
       it('uses plugins array from options', function (done) {
         var input = { plugins: ['react', 'fand'] };
         generator().withOptions(input).on('end', function () {
-          assert.fileContent('.eslintrc.json', stringify(input));
+          assert.jsonFileContent('.eslintrc.json', input);
           done();
         });
       });
@@ -82,7 +82,7 @@ describe('generator-eslint-init:app', function () {
     it('uses config option', function (done) {
       var input = { key: 'val' };
       generator().withOptions({ config: input }).on('end', function () {
-        assert.fileContent('.eslintrc.json', stringify(input));
+        assert.jsonFileContent('.eslintrc.json', input);
         done();
       });
     });
@@ -90,7 +90,7 @@ describe('generator-eslint-init:app', function () {
     it('uses config.extends string option', function (done) {
       var input = { extends: 'airbnb' };
       generator().withOptions({ config: input }).on('end', function () {
-        assert.fileContent('.eslintrc.json', stringify(input));
+        assert.jsonFileContent('.eslintrc.json', input);
         done();
       });
     });
@@ -98,7 +98,7 @@ describe('generator-eslint-init:app', function () {
     it('uses config.extends array option', function (done) {
       var input = { extends: ['airbnb', 'hexo'] };
       generator().withOptions({ config: input }).on('end', function () {
-        assert.fileContent('.eslintrc.json', stringify(input));
+        assert.jsonFileContent('.eslintrc.json', input);
         done();
       });
     });
@@ -106,7 +106,7 @@ describe('generator-eslint-init:app', function () {
     it('uses config.plugins array option', function (done) {
       var input = { plugins: ['react', 'fand'] };
       generator().withOptions({ config: input }).on('end', function () {
-        assert.fileContent('.eslintrc.json', stringify(input));
+        assert.jsonFileContent('.eslintrc.json', input);
         done();
       });
     });
@@ -115,12 +115,12 @@ describe('generator-eslint-init:app', function () {
   it('install extends and plugins with proper prefixes', function (done) {
     var input = {
       extends: 'airbnb/legacy',
-      plugins: ['require-path-exists'],
+      plugins: ['require-path-exists']
     };
     generator()
       .withOptions({ config: input })
       .on('end', function () {
-        assert.fileContent('.eslintrc.json', stringify(input));
+        assert.jsonFileContent('.eslintrc.json', input);
         assert.file('package.json');
         assert.fileContent('package.json', /eslint/);
         assert.fileContent('package.json', /babel-eslint/);
@@ -133,7 +133,7 @@ describe('generator-eslint-init:app', function () {
   it('extends and doesnt overwrite existing .eslintrc.json', function (done) {
     var input = {
       extends: 'airbnb/legacy',
-      plugins: ['require-path-exists'],
+      plugins: ['require-path-exists']
     };
     var existing = { key: 'val' };
     generator()
@@ -142,7 +142,7 @@ describe('generator-eslint-init:app', function () {
         gen.fs.write(gen.destinationPath('.eslintrc.json'), stringify(existing));
       }.bind(this))
       .on('end', function () {
-        assert.fileContent('.eslintrc.json', stringify(R.merge(existing, input)));
+        assert.jsonFileContent('.eslintrc.json', R.merge(existing, input));
         assert.file('package.json');
         assert.fileContent('package.json', /eslint/);
         assert.fileContent('package.json', /babel-eslint/);
