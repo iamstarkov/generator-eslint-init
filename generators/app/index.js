@@ -75,7 +75,7 @@ module.exports = yeoman.Base.extend({
     );
 
     var deps = concatAll([
-      ['eslint@^2.4.0', 'babel-eslint@^5.0.0'],
+      ['eslint@^2.4.0'],
       (maybeStr2arr(result.extends) || []).map(getPkgName).map(R.concat('eslint-config-')),
       (maybeStr2arr(result.plugins) || []).map(R.concat('eslint-plugin-'))
     ]);
