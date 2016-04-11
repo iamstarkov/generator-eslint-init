@@ -44,7 +44,7 @@
   },
   "devDependencies": {
     "eslint": "^2.4.0",
-    "eslint-config-airbnb": "^6.1.0",
+    "eslint-config-airbnb": "^7.0.0",
     "eslint-plugin-require-path-exists": "^1.1.4",
     "mocha": "^2.3.4",
     "yeoman-assert": "^2.0.0",
