@@ -37,17 +37,17 @@
   ],
   "dependencies": {
     "deps-object": "^2.0.0",
-    "ramda": "^0.21.0",
+    "ramda": "^0.23.0",
     "sorted-object": "^2.0.0",
     "split-keywords": "^2.0.0",
-    "yeoman-generator": "^0.22.4"
+    "yeoman-generator": "^1.1.1"
   },
   "devDependencies": {
-    "eslint": "^2.4.0",
-    "eslint-config-airbnb": "^6.1.0",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^14.1.0",
     "eslint-plugin-require-path-exists": "^1.1.4",
-    "mocha": "^2.3.4",
-    "yeoman-assert": "^2.0.0",
+    "mocha": "^3.2.0",
+    "yeoman-assert": "^3.0.0",
     "yeoman-test": "^1.0.0"
   },
   "repository": "iamstarkov/generator-eslint-init",
